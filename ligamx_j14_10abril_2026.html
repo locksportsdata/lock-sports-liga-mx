@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liga MX Report — 10-12 Abril 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Lora:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #fdfbf7; color: #1a1a2e; font-family: 'Poppins', sans-serif; font-size: 15px; line-height: 1.6; }
+  .masthead { background: #0c1a2e; color: #fff; padding: 48px 40px 36px; position: relative; overflow: hidden; }
+  .masthead-logo { position: absolute; top: 0; right: 0; opacity: 0.92; width: 80px; height: 80px; }
+  .masthead-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #e8a020; margin-bottom: 8px; font-weight: 600; }
+  .masthead-title .w1 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 48px; color: #fff; display: block; }
+  .masthead-title .w2 { font-family: 'Lora', serif; font-style: italic; font-weight: 400; font-size: 44px; color: #e8a020; display: block; }
+  .masthead-date { font-size: 13px; color: #8a9bb5; margin-bottom: 20px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { background: rgba(232,160,32,0.15); border: 1px solid rgba(232,160,32,0.35); color: #e8a020; border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .legend-bar { background: #f0ece3; border-left: 4px solid #e8a020; padding: 12px 40px; font-size: 12px; color: #555; }
+  .legend-bar strong { color: #0c1a2e; }
+  .content { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+  .tabla-section { margin-bottom: 36px; }
+  .tabla-header { background: #0c1a2e; color: #fff; padding: 10px 20px; font-weight: 700; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 6px 6px 0 0; }
+  .tabla-header span { color: #e8a020; }
+  .tabla-grid { display: grid; grid-template-columns: 1fr 1fr; background: #fff; border: 1px solid #e5e0d5; border-top: none; border-radius: 0 0 10px 10px; overflow: hidden; }
+  .tabla-col { padding: 14px 20px; }
+  .tabla-col:first-child { border-right: 1px solid #e5e0d5; }
+  .tabla-col-title { font-size: 10px; color: #e8a020; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 10px; }
+  .tabla-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid #f0ece3; font-size: 13px; }
+  .tabla-row:last-child { border-bottom: none; }
+  .t-pos { font-weight: 700; color: #0c1a2e; width: 20px; }
+  .t-team { flex: 1; padding-left: 8px; }
+  .t-pts { font-weight: 700; color: #0c1a2e; }
+  .t-lider { color: #e8a020; font-size: 10px; font-weight: 700; }
+  .t-clasif { color: #166534; font-size: 10px; font-weight: 700; }
+  .league-banner { background: #CC1E2B; color: #fff; padding: 10px 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 6px 6px 0 0; margin-top: 32px; }
+  .match-card { background: #fff; border: 1px solid #e5e0d5; border-top: none; overflow: hidden; }
+  .match-card + .match-card { border-top: 1px solid #e5e0d5; }
+  .match-card:last-of-type { border-radius: 0 0 10px 10px; }
+  .match-header { background: #0c1a2e; color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .match-name { font-weight: 700; font-size: 16px; }
+  .match-meta { font-size: 11px; color: #8a9bb5; margin-top: 3px; }
+  .match-tag { background: #e8a020; color: #0c1a2e; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; white-space: nowrap; margin-top: 4px; }
+  .odds-strip { display: grid; grid-template-columns: repeat(5, 1fr); background: #f8f6f0; border-bottom: 1px solid #e5e0d5; }
+  .odd-cell { padding: 10px 8px; text-align: center; border-right: 1px solid #e5e0d5; }
+  .odd-cell:last-child { border-right: none; }
+  .odd-team { font-size: 11px; color: #666; font-weight: 500; margin-bottom: 3px; }
+  .odd-val { font-size: 16px; font-weight: 700; }
+  .odd-fav { color: #b91c1c; }
+  .odd-pos { color: #166534; }
+  .stats-section { padding: 16px 20px; }
+  .stats-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 10px; font-weight: 600; }
+  .stats-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .stats-table th { background: #f5f2eb; color: #0c1a2e; font-weight: 600; padding: 8px 10px; text-align: center; font-size: 11px; }
+  .stats-table th:first-child { text-align: left; }
+  .stats-table td { padding: 8px 10px; border-bottom: 1px solid #f0ece3; text-align: center; }
+  .stats-table td:first-child { text-align: left; font-weight: 600; }
+  .stats-table tr:last-child td { border-bottom: none; }
+  .injuries-strip { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #e5e0d5; }
+  .injury-side { padding: 12px 16px; }
+  .injury-side:first-child { border-right: 1px solid #e5e0d5; }
+  .injury-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; font-weight: 600; margin-bottom: 8px; }
+  .injury-item { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid #f5f2eb; font-size: 12px; }
+  .injury-item:last-child { border-bottom: none; }
+  .injury-name { color: #0c1a2e; font-weight: 500; }
+  .badge-out { background: #fee2e2; color: #b91c1c; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; }
+  .badge-doubt { background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; }
+  .badge-ok { background: #dcfce7; color: #166534; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; }
+  .stakes-box { background: #0c1a2e; color: #c9d5e8; padding: 16px 20px; margin: 16px 20px; border-radius: 6px; font-family: 'Lora', serif; font-style: italic; font-size: 14px; line-height: 1.7; border-left: 4px solid #e8a020; }
+  .stakes-box strong { color: #e8a020; font-style: normal; font-family: 'Poppins', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px; font-weight: 600; }
+  .analysis-section { padding: 0 20px 20px; }
+  .analysis-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 10px; font-weight: 600; }
+  .analysis-bullets { list-style: none; }
+  .analysis-bullets li { padding: 8px 0 8px 20px; border-bottom: 1px solid #f0ece3; font-size: 13px; color: #333; position: relative; }
+  .analysis-bullets li:last-child { border-bottom: none; }
+  .analysis-bullets li::before { content: ''; position: absolute; left: 0; top: 16px; width: 8px; height: 8px; border-radius: 50%; background: #e8a020; }
+  .conclusions { margin-top: 48px; background: #fff; border: 1px solid #e5e0d5; border-radius: 10px; overflow: hidden; }
+  .conclusions-header { background: #0c1a2e; color: #fff; padding: 14px 20px; font-weight: 700; font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .conclusions-header span { color: #e8a020; }
+  .conclusions-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .conc-cell { padding: 16px 20px; border-right: 1px solid #e5e0d5; border-bottom: 1px solid #e5e0d5; }
+  .conc-cell:nth-child(even) { border-right: none; }
+  .conc-cell:nth-last-child(-n+2) { border-bottom: none; }
+  .conc-label { font-size: 10px; color: #e8a020; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 6px; }
+  .conc-val { font-size: 14px; font-weight: 600; color: #0c1a2e; }
+  .conc-sub { font-size: 12px; color: #777; margin-top: 2px; }
+  .report-footer { margin-top: 40px; padding: 20px; font-size: 11px; color: #aaa; text-align: center; border-top: 1px solid #e5e0d5; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <svg class="masthead-logo" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <rect width="80" height="80" fill="#0c1a2e"/>
+    <rect x="10" y="10" width="60" height="60" rx="8" fill="none" stroke="#e8a020" stroke-width="2"/>
+    <text x="40" y="30" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="800" font-size="11" fill="#fff">LOCK</text>
+    <text x="40" y="44" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="700" font-size="9" fill="#e8a020">SPORTS</text>
+    <text x="40" y="56" text-anchor="middle" font-family="Poppins,sans-serif" font-weight="700" font-size="9" fill="#e8a020">DATA</text>
+    <circle cx="40" cy="65" r="3" fill="#e8a020"/>
+  </svg>
+  <p class="masthead-eyebrow">Informe Diario de Futbol</p>
+  <div class="masthead-title">
+    <span class="w1">Futbol Matchday</span>
+    <span class="w2">Report</span>
+  </div>
+  <p class="masthead-date">10-12 de Abril, 2026 | Liga MX — Clausura 2026, Jornada 14</p>
+  <div class="pills">
+    <span class="pill">Cuotas</span>
+    <span class="pill">Liga MX</span>
+    <span class="pill">Totales</span>
+    <span class="pill">Lesiones</span>
+    <span class="pill">Análisis</span>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <strong>Cuotas en formato americano — Caliente.mx.</strong> Estadísticas: Liga MX Oficial. A 4 jornadas del cierre de fase regular. Sin Play-In — solo pasan los 8 primeros directamente a Liguilla.
+</div>
+
+<div class="content">
+
+  <!-- TABLA GENERAL -->
+  <div class="tabla-section">
+    <div class="tabla-header">Tabla General — <span>Clausura 2026 (Previo J14)</span></div>
+    <div class="tabla-grid">
+      <div class="tabla-col">
+        <div class="tabla-col-title">Zona Liguilla (Top 8)</div>
+        <div class="tabla-row"><span class="t-pos">1</span><span class="t-team">Chivas <span class="t-lider">CLASIFICADO</span></span><span class="t-pts">31 pts</span></div>
+        <div class="tabla-row"><span class="t-pos">2</span><span class="t-team">Cruz Azul</span><span class="t-pts">27 pts</span></div>
+        <div class="tabla-row"><span class="t-pos">3</span><span class="t-team">Toluca</span><span class="t-pts">26 pts</span></div>
+        <div class="tabla-row"><span class="t-pos">4</span><span class="t-team">Pachuca</span><span class="t-pts">25 pts</span></div>
+        <div class="tabla-row"><span class="t-pos">5</span><span class="t-team">Pumas</span><span class="t-pts">24 pts</span></div>
+        <div class="tabla-row"><span class="t-pos">6</span><span class="t-team">América</span><span class="t-pts">18 pts</span></div>
+        <div class="tabla-row"><span class="t-pos">7</span><span class="t-team">Atlas</span><span class="t-pts">18 pts</span></div>
+        <div class="tabla-row"><span class="t-pos">8</span><span class="t-team">Tigres <span class="t-clasif">BORDE</span></span><span class="t-pts">17 pts</span></div>
+      </div>
+      <div class="tabla-col">
+        <div class="tabla-col-title">Goleo Individual</div>
+        <div class="tabla-row"><span class="t-pos">1</span><span class="t-team">A. González (Chivas) 🔒</span><span class="t-pts">12 goles</span></div>
+        <div class="tabla-row"><span class="t-pos">2</span><span class="t-team">Joao Pedro (San Luis)</span><span class="t-pts">11 goles</span></div>
+        <div class="tabla-row"><span class="t-pos">3</span><span class="t-team">Paulinho (Toluca)</span><span class="t-pts">6 goles</span></div>
+        <div class="tabla-col-title" style="margin-top:14px">Datos clave J14</div>
+        <div class="tabla-row"><span class="t-team">Sin Play-In</span><span class="t-pts" style="color:#b91c1c">Top 8 directo</span></div>
+        <div class="tabla-row"><span class="t-team">Jornadas restantes</span><span class="t-pts">4 (incluyendo J14)</span></div>
+        <div class="tabla-row"><span class="t-team">Clásico Joven</span><span class="t-pts" style="color:#e8a020">Estadio Banorte</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="league-banner">Liga MX — Clausura 2026 — Jornada 14 — Fin de Semana 10-12 Abril</div>
+
+  <!-- PARTIDO 1: TIGRES vs CHIVAS -->
+  <div class="match-card">
+    <div class="match-header">
+      <div>
+        <div class="match-name">Tigres UANL vs Guadalajara Chivas</div>
+        <div class="match-meta">Estadio Universitario, Monterrey | Sáb 11 Abr — 17:00 CST | Azteca 7 · Fox One</div>
+      </div>
+      <div class="match-tag">Líder de visita</div>
+    </div>
+    <div class="odds-strip">
+      <div class="odd-cell"><div class="odd-team">Tigres</div><div class="odd-val odd-pos">+195</div></div>
+      <div class="odd-cell"><div class="odd-team">Empate</div><div class="odd-val" style="color:#0c1a2e">+260</div></div>
+      <div class="odd-cell"><div class="odd-team">Chivas</div><div class="odd-val odd-fav">-115</div></div>
+      <div class="odd-cell"><div class="odd-team">Más de 2.5</div><div class="odd-val" style="color:#0c1a2e">-120</div></div>
+      <div class="odd-cell"><div class="odd-team">Menos de 2.5</div><div class="odd-val odd-pos">+100</div></div>
+    </div>
+    <div class="stats-section">
+      <h4>Estadísticas comparativas — Clausura 2026</h4>
+      <table class="stats-table">
+        <tr><th>Categoría</th><th>Tigres</th><th>Chivas</th></tr>
+        <tr><td>Posición en tabla</td><td>#8 — 15 pts (borde Liguilla)</td><td>#1 — 31 pts (YA clasificado)</td></tr>
+        <tr><td>Forma reciente (5 PJ)</td><td>V-D-E-V-D</td><td>V-V-V-E-V</td></tr>
+        <tr><td>Goles anotados/partido</td><td>1.40</td><td>2.00</td></tr>
+        <tr><td>Goles recibidos/partido</td><td>1.20</td><td>0.90</td></tr>
+        <tr><td>Situación</td><td>Necesita ganar — sin margen</td><td>Ya clasificado — sin presión</td></tr>
+      </table>
+    </div>
+    <div class="injuries-strip">
+      <div class="injury-side">
+        <div class="injury-title">Tigres — Novedades</div>
+        <div class="injury-item"><span class="injury-name">Ángel Correa</span><span class="badge-ok">Disponible — figura ofensiva</span></div>
+        <div class="injury-item"><span class="injury-name">Guido Pizarro</span><span class="badge-ok">Disponible — renovó contrato</span></div>
+        <div class="injury-item"><span class="injury-name">Plantel general</span><span class="badge-ok">Sin bajas confirmadas</span></div>
+      </div>
+      <div class="injury-side">
+        <div class="injury-title">Chivas — Novedades</div>
+        <div class="injury-item"><span class="injury-name">Jonathan Pérez</span><span class="badge-out">Baja — todo el torneo</span></div>
+        <div class="injury-item"><span class="injury-name">Armando González</span><span class="badge-ok">Disponible — 9 goles en el torneo</span></div>
+        <div class="injury-item"><span class="injury-name">Plantel general</span><span class="badge-ok">Descansados — sin Concachampions</span></div>
+      </div>
+    </div>
+    <div class="stakes-box">
+      <strong>Lo que está en juego</strong>
+      Tigres está en el 8vo lugar con 15 puntos — el último boleto a Liguilla — y tiene que Necaxa y León pisándoles los talones a solo 3 puntos. Una derrota esta noche los puede dejar fuera. Chivas ya clasificó con 31 puntos, el primero del torneo en hacerlo, y llega sin presión. Pero la "Hormiga" González sigue persiguiendo a Joao Pedro en el Botín de Oro con 9 goles. El Estadio Universitario como factor.
+    </div>
+    <div class="analysis-section">
+      <h4>Análisis del Partido</h4>
+      <ul class="analysis-bullets">
+        <li><strong>Tigres juega con fuego:</strong> El 8vo lugar tiene solo 15 puntos con 4 jornadas restantes. Necaxa y León están a 3 puntos. Una derrota esta noche y la Liguilla se complica seriamente. Eso significa que Tigres saldrá a atacar desde el primer minuto — no puede especular.</li>
+        <li><strong>Chivas sin presión pero con hambre:</strong> Ya están clasificados, lo que les da tranquilidad. Pero Milito no va a bajar la guardia — la Hormiga González sigue un gol por detrás de Joao Pedro en el Botín de Oro. Chivas llegará a ganar.</li>
+        <li><strong>Lectura de cuotas:</strong> Chivas favorito de visita a -115 — misma historia que ante Monterrey cuando ganaron 3-2. El over 2.5 a -120 tiene sentido con dos equipos que necesitan/quieren anotar. Tigres a +195 es el valor especulativo si el Universitario explota.</li>
+        <li><strong>Resultado más probable:</strong> Chivas gana 2-1 de visita. La Hormiga González anota y amplía su ventaja en el Botín de Oro. Tigres lo intenta pero no le alcanza.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PARTIDO 2: AMERICA vs CRUZ AZUL -->
+  <div class="match-card">
+    <div class="match-header">
+      <div>
+        <div class="match-name">Club América vs Cruz Azul — Clásico Joven</div>
+        <div class="match-meta">Estadio Banorte (Azteca), CDMX | Sáb 11 Abr — 21:05 CST | Canal 5 · TUDN · ViX</div>
+      </div>
+      <div class="match-tag">Clásico Joven · Reinauguración Liga MX</div>
+    </div>
+    <div class="odds-strip">
+      <div class="odd-cell"><div class="odd-team">América</div><div class="odd-val odd-fav">-130</div></div>
+      <div class="odd-cell"><div class="odd-team">Empate</div><div class="odd-val" style="color:#0c1a2e">+280</div></div>
+      <div class="odd-cell"><div class="odd-team">Cruz Azul</div><div class="odd-val odd-pos">+340</div></div>
+      <div class="odd-cell"><div class="odd-team">Más de 2.5</div><div class="odd-val" style="color:#0c1a2e">-110</div></div>
+      <div class="odd-cell"><div class="odd-team">Menos de 2.5</div><div class="odd-val" style="color:#0c1a2e">-110</div></div>
+    </div>
+    <div class="stats-section">
+      <h4>Estadísticas comparativas — Clausura 2026</h4>
+      <table class="stats-table">
+        <tr><th>Categoría</th><th>Club América</th><th>Cruz Azul</th></tr>
+        <tr><td>Posición en tabla</td><td>#6 — 16 pts</td><td>#2 — 27 pts</td></tr>
+        <tr><td>Forma reciente (5 PJ)</td><td>E-V-E-D-V</td><td>V-V-E-V-D</td></tr>
+        <tr><td>Goles anotados/partido</td><td>1.50</td><td>1.90</td></tr>
+        <tr><td>Goles recibidos/partido</td><td>1.20</td><td>1.00</td></tr>
+        <tr><td>Situación especial</td><td>Regresa al Banorte por liga</td><td>Sublíder — necesita ganar</td></tr>
+        <tr><td>Último Clásico Joven</td><td colspan="2" style="text-align:center">América bicampeón final Clausura 2024 en este mismo estadio</td></tr>
+      </table>
+    </div>
+    <div class="injuries-strip">
+      <div class="injury-side">
+        <div class="injury-title">América — Novedades</div>
+        <div class="injury-item"><span class="injury-name">Raphael Veiga</span><span class="badge-ok">Disponible — goles recientes</span></div>
+        <div class="injury-item"><span class="injury-name">Desgaste Concachampions</span><span class="badge-doubt">Jugó entre semana — fatiga</span></div>
+        <div class="injury-item"><span class="injury-name">Regreso al Banorte</span><span class="badge-ok">Su estadio — energía extra</span></div>
+      </div>
+      <div class="injury-side">
+        <div class="injury-title">Cruz Azul — Novedades</div>
+        <div class="injury-item"><span class="injury-name">Desgaste Concachampions</span><span class="badge-doubt">Jugó entre semana — fatiga</span></div>
+        <div class="injury-item"><span class="injury-name">Plantel completo</span><span class="badge-ok">Sin bajas confirmadas</span></div>
+        <div class="injury-item"><span class="injury-name">Racha visitante</span><span class="badge-ok">Paso perfecto fuera de casa</span></div>
+      </div>
+    </div>
+    <div class="stakes-box">
+      <strong>Lo que está en juego</strong>
+      El primer Clásico Joven en el Estadio Banorte desde la polémica final del Clausura 2024, donde América le ganó a Cruz Azul el bicampeonato. Ambos equipos llegan con desgaste extra por la Concachampions entre semana. América necesita ganar en casa para afianzar su lugar en Liguilla. Cruz Azul, sublíder, necesita los puntos para no perder terreno ante Chivas. El Banorte estrena su actividad de Liga MX con este Clásico — y los recuerdos del polémico penalti de Rotondi siguen frescos.
+    </div>
+    <div class="analysis-section">
+      <h4>Análisis del Partido</h4>
+      <ul class="analysis-bullets">
+        <li><strong>El factor desgaste es clave:</strong> Ambos equipos jugaron Concachampions entre semana. América y Cruz Azul llegan con minutos extra en las piernas. Eso tiende a producir partidos más abiertos, con más espacios — lo que puede beneficiar al over.</li>
+        <li><strong>América regresa a casa:</strong> El Banorte vuelve a la Liga MX con un Clásico Joven. El equipo azulcrema no jugaba aquí en liga desde mayo de 2024. La energía del regreso es real — el apoyo del público puede ser el factor diferencial.</li>
+        <li><strong>Cruz Azul es el mejor visitante del torneo:</strong> Tienen paso perfecto como visitantes en el Clausura 2026. Si hay un equipo capaz de ganar en el Banorte esta noche, es La Máquina. Cruz Azul a +340 tiene valor.</li>
+        <li><strong>Lectura de cuotas:</strong> América favorito a -130 por localía. Los totales al 50/50 (-110/-110) reflejan incertidumbre real con el desgaste de ambos. El over 2.5 con Clásicos Jóvenes tiene respaldo histórico — estos partidos rara vez terminan sin goles.</li>
+        <li><strong>Resultado más probable:</strong> Empate 1-1 o América gana 2-1. El Banorte ruge pero Cruz Azul no llega a perder.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PARTIDO 3: TOLUCA vs SAN LUIS -->
+  <div class="match-card">
+    <div class="match-header">
+      <div>
+        <div class="match-name">Toluca vs Atlético de San Luis</div>
+        <div class="match-meta">Estadio Nemesio Diez, Toluca | Dom 12 Abr — 19:00 CST | Canal 5 · TUDN · ViX</div>
+      </div>
+      <div class="match-tag">Bicampeón en casa</div>
+    </div>
+    <div class="odds-strip">
+      <div class="odd-cell"><div class="odd-team">Toluca</div><div class="odd-val odd-fav">-200</div></div>
+      <div class="odd-cell"><div class="odd-team">Empate</div><div class="odd-val odd-pos">+320</div></div>
+      <div class="odd-cell"><div class="odd-team">San Luis</div><div class="odd-val odd-pos">+500</div></div>
+      <div class="odd-cell"><div class="odd-team">Más de 2.5</div><div class="odd-val odd-fav">-140</div></div>
+      <div class="odd-cell"><div class="odd-team">Menos de 2.5</div><div class="odd-val odd-pos">+115</div></div>
+    </div>
+    <div class="stats-section">
+      <h4>Estadísticas comparativas — Clausura 2026</h4>
+      <table class="stats-table">
+        <tr><th>Categoría</th><th>Toluca</th><th>Atlético San Luis</th></tr>
+        <tr><td>Posición en tabla</td><td>#3 — 26 pts</td><td>#14 — 13 pts (fuera)</td></tr>
+        <tr><td>Forma reciente (5 PJ)</td><td>V-V-D-V-V</td><td>E-D-D-V-E</td></tr>
+        <tr><td>Goles anotados/partido</td><td>1.80</td><td>1.30</td></tr>
+        <tr><td>Goles recibidos/partido</td><td>0.90</td><td>1.80</td></tr>
+        <tr><td>Situación</td><td>Busca acercarse a Cruz Azul (#2)</td><td>Fuera de Liguilla — necesita puntos</td></tr>
+        <tr><td>Goleador</td><td>Paulinho — clave ofensivo</td><td>Joao Pedro — líder goleo (10 goles)</td></tr>
+      </table>
+    </div>
+    <div class="injuries-strip">
+      <div class="injury-side">
+        <div class="injury-title">Toluca — Novedades</div>
+        <div class="injury-item"><span class="injury-name">Paulinho</span><span class="badge-ok">Disponible — no fue a Portugal</span></div>
+        <div class="injury-item"><span class="injury-name">Desgaste Concachampions</span><span class="badge-doubt">Jugó entre semana</span></div>
+        <div class="injury-item"><span class="injury-name">Plantel general</span><span class="badge-ok">Sin bajas graves</span></div>
+      </div>
+      <div class="injury-side">
+        <div class="injury-title">San Luis — Novedades</div>
+        <div class="injury-item"><span class="injury-name">Joao Pedro</span><span class="badge-ok">Disponible — 11 goles, 2do en goleo</span></div>
+        <div class="injury-item"><span class="injury-name">Plantel general</span><span class="badge-ok">Sin bajas confirmadas</span></div>
+        <div class="injury-item"><span class="injury-name">Situación tabla</span><span class="badge-doubt">A 3 pts del 8vo lugar</span></div>
+      </div>
+    </div>
+    <div class="stakes-box">
+      <strong>Lo que está en juego</strong>
+      Toluca busca el tricampeonato y necesita acercarse a Cruz Azul para asegurar la segunda posición y llegar a la Liguilla con ventaja. San Luis está fuera del top 8 con 13 puntos, pero a solo 3 del octavo lugar con Joao Pedro — el líder goleador del torneo — como arma principal. En el Nemesio Diez, Toluca es un equipo diferente. Paulinho regresa sin el desgaste de la Selección Portuguesa. San Luis tiene todo por ganar y nada que perder.
+    </div>
+    <div class="analysis-section">
+      <h4>Análisis del Partido</h4>
+      <ul class="analysis-bullets">
+        <li><strong>Toluca en casa es peligroso:</strong> El Nemesio Diez a 2,600 metros de altitud es ventaja real. Los Diablos Rojos son favoritos claros a -200 y con razón — San Luis tiene una de las peores defensas del torneo con 1.80 goles recibidos por partido de visita.</li>
+        <li><strong>Joao Pedro vs la defensa de Toluca:</strong> El delantero brasileño lleva 11 goles, segundo en el goleo. Pero Toluca solo recibe 0.90 goles por partido — una de las mejores defensas del torneo. Ese choque es el duelo dentro del duelo.</li>
+        <li><strong>Lectura de cuotas:</strong> Toluca a -200 es el favorito más sólido del fin de semana. El over 2.5 a -140 también tiene mucho respaldo — Toluca anota en casi todos sus partidos en casa y San Luis no puede darse el lujo de especular defensivamente.</li>
+        <li><strong>Resultado más probable:</strong> Toluca gana 2-0 o 3-1. Paulinho anota. San Luis no puede con la altitud y la intensidad de los Diablos en casa.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONCLUSIONES -->
+  <div class="conclusions">
+    <div class="conclusions-header">Conclusiones del Fin de Semana — <span>J14 Clausura 2026</span></div>
+    <div class="conclusions-grid">
+      <div class="conc-cell">
+        <div class="conc-label">Partido más atractivo</div>
+        <div class="conc-val">América vs Cruz Azul</div>
+        <div class="conc-sub">Clásico Joven en el Banorte reinaugurado. Mismos protagonistas del polémico título de 2024.</div>
+      </div>
+      <div class="conc-cell">
+        <div class="conc-label">Cuota de valor</div>
+        <div class="conc-val">Chivas -115 vs Tigres</div>
+        <div class="conc-sub">Líder clasificado de visita. Tigres necesita ganar sí o sí — partido abierto que beneficia al visitante.</div>
+      </div>
+      <div class="conc-cell">
+        <div class="conc-label">Over con valor</div>
+        <div class="conc-val">Toluca vs San Luis — Over 2.5</div>
+        <div class="conc-sub">Toluca anota en casa, San Luis recibe 1.80 goles/partido de visita. Joao Pedro necesita goles.</div>
+      </div>
+      <div class="conc-cell">
+        <div class="conc-label">Equipo más caliente</div>
+        <div class="conc-val">Chivas — 31 pts, ya clasificado</div>
+        <div class="conc-sub">Primer clasificado del torneo. La Hormiga González lidera el Botín de Oro con 12 goles.</div>
+      </div>
+      <div class="conc-cell">
+        <div class="conc-label">Partido con más contexto</div>
+        <div class="conc-val">Tigres — necesita ganar</div>
+        <div class="conc-sub">8vo lugar con 3 equipos pisándoles los talones. Una derrota los puede dejar fuera de Liguilla.</div>
+      </div>
+      <div class="conc-cell">
+        <div class="conc-label">Dato del fin de semana</div>
+        <div class="conc-val">Sin Play-In en Clausura 2026</div>
+        <div class="conc-sub">Solo pasan los 8 primeros directo. Cada punto vale doble. La Liguilla empieza el 2 de mayo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <strong>Fuentes:</strong> Caliente.mx (cuotas), Liga MX Oficial, TUDN, Mediotiempo, ClaroSports, El Financiero<br>
+    <strong>Disclaimer:</strong> Este reporte es exclusivamente informativo. Las cuotas son orientativas y pueden variar. Lock Sports Data no constituye asesoramiento de apuestas.<br>
+    Generado el 10 de Abril, 2026 — Lock Sports Data
+  </div>
+
+</div>
+</body>
+</html>
